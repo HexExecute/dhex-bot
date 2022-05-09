@@ -1,0 +1,35 @@
+{
+  "name": "dhex-bot",
+  "version": "1.0.0",
+  "description": "An all in one open source discord bot.",
+  "main": "index.js",
+  "scripts": {
+    "start": "clear; echo 'STARTUP: compiling...'; tsc; clear; echo 'STARTUP: starting...'; node dist/main.js",
+    "start:prod": "clear; echo 'STARTUP: starting...'; node dist/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HexExecute/dhex-bot.git"
+  },
+  "keywords": [
+    "dhex",
+    "bot",
+    "dhex-bot",
+    "discord",
+    "discord.js",
+    "discord-bot"
+  ],
+  "author": "Hex",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HexExecute/dhex-bot/issues"
+  },
+  "homepage": "https://github.com/HexExecute/dhex-bot#readme",
+  "dependencies": {
+    "@types/express": "^4.17.13",
+    "@types/node": "^17.0.31",
+    "discord-api-types": "^0.32.1",
+    "discord.js": "^13.6.0",
+    "express": "^4.18.1"
+  }
+}

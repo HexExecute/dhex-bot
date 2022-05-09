@@ -1,0 +1,11 @@
+{
+    "client": {
+        "token": "OTcyOTQ0MDEwNTQ3MTcxNDM5.GUFsIa.urRcMkFrpp8J8hjd0YNljcIEzje9U3Rm5XwlFs",
+        "options": {
+            "intents": 32767
+        }
+    },
+    "commands": {
+        "defaultPrefix": "!"
+    }
+}
