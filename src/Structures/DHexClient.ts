@@ -1,15 +1,22 @@
-import { Client } from 'discord.js'
+import { Client, ClientOptions } from 'discord.js'
 import { CommandHandler } from './CommandHandler'
-import { client } from '../config.json'
+import { EventHandler } from './EventHandler'
+
+import config from '../config.json'
 
 export class DHexClient extends Client {
-  public handler: CommandHandler = new CommandHandler(this)
+  public commands: CommandHandler
+  public events: EventHandler
 
   constructor() {
-    super(client.options)
+    super(config.client.options as ClientOptions)
+    this.commands = new CommandHandler(this)
+    this.events = new EventHandler(this)
   }
 
-  public start(): void {
-    this.login(client.token)
+  async start() {
+    await this.login(config.client.token)
+    await this.commands.register()
+    await this.events.register()
   }
 }

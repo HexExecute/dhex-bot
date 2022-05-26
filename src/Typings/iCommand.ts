@@ -1,13 +1,8 @@
-export enum CommandType {
-  Both = 0,
-  Interaction = 1,
-  Text = 2,
-}
+import { ApplicationCommandOptionData, CommandInteraction } from 'discord.js'
 
-interface options {
-  args?: any
-  interaction?: any
-  message?: any
+export interface CommandOptions {
+  args: object
+  interaction: CommandInteraction
 }
 
 export interface iCommand {
@@ -15,9 +10,7 @@ export interface iCommand {
   description: string
   usage: string
   aliases?: string[]
-  type: CommandType
-  prefix?: string
   permissions?: string[]
-  options?: any
-  execute: (options: options) => void
+  options?: ApplicationCommandOptionData
+  execute: (options: CommandOptions) => void
 }

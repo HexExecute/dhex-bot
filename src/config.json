@@ -6,6 +6,12 @@
     }
   },
   "commands": {
-    "defaultPrefix": "!"
+    "directory": "Commands/"
+  },
+  "events": {
+    "directory": "Events/"
+  },
+  "general": {
+    "guildID": "837767108867784754"
   }
 }
