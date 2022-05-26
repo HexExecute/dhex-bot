@@ -53,6 +53,15 @@ class CommandHandler {
                 let cmd = (yield Promise.resolve().then(() => __importStar(require(dir + file)))).default;
                 this.commands.set(cmd.name, cmd);
                 this.slashCommands.push(cmd);
+                if (cmd.aliases)
+                    for (const alias of cmd.aliases) {
+                        this.commands.set(alias, cmd);
+                        let temp = Object.assign({}, cmd);
+                        temp.name = alias;
+                        temp.aliases = null;
+                        temp.description = 'Alias for ' + cmd.name;
+                        this.slashCommands.push(temp);
+                    }
             }
             if (!config_json_1.default.general.guildID)
                 return console.error('ERROR: please provide a guildID in the config');
@@ -62,12 +71,12 @@ class CommandHandler {
                 .then(() => console.log('INFO: commands have been registered'));
         });
     }
-    runCommand(command, options) {
+    getCommand(command) {
         const cmd = this.commands.get(command);
         if (cmd)
-            return cmd.execute(options);
+            return cmd;
         else
-            return console.error(`ERROR: couldn't find command named '${command}'`);
+            throw new Error(`ERROR: couldn't find command named '${command}'`);
     }
 }
 exports.CommandHandler = CommandHandler;

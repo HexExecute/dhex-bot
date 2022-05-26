@@ -5,7 +5,9 @@ export default new Command({
   description: 'A simple test command.',
   usage: 'ping',
   permissions: ['ADMINISTRATOR'],
+  ephemeral: true,
+  aliases: ['test'],
   execute: ({ interaction }) => {
-    interaction.reply({ content: 'Pong!', ephemeral: true })
+    interaction.editReply('Pong')
   },
 })

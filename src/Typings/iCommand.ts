@@ -1,8 +1,14 @@
-import { ApplicationCommandOptionData, CommandInteraction } from 'discord.js'
+import { DHexClient } from '../Structures/DHexClient'
+import {
+  ApplicationCommandOptionData,
+  CommandInteraction,
+  PermissionResolvable,
+} from 'discord.js'
 
 export interface CommandOptions {
   args: object
   interaction: CommandInteraction
+  client: DHexClient
 }
 
 export interface iCommand {
@@ -10,7 +16,8 @@ export interface iCommand {
   description: string
   usage: string
   aliases?: string[]
-  permissions?: string[]
-  options?: ApplicationCommandOptionData
-  execute: (options: CommandOptions) => void
+  permissions?: PermissionResolvable
+  ephemeral?: boolean
+  options?: ApplicationCommandOptionData[]
+  execute: (options: CommandOptions) => any
 }

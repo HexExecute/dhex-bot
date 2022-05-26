@@ -1,5 +1,5 @@
 import { DHexClient } from './DHexClient'
-import { CommandOptions, iCommand } from '../Typings/iCommand'
+import { iCommand } from '../Typings/iCommand'
 import {
   Guild,
   ApplicationCommandDataResolvable,
@@ -29,6 +29,16 @@ export class CommandHandler {
 
       this.commands.set(cmd.name, cmd)
       this.slashCommands.push(cmd as ApplicationCommandData)
+
+      if (cmd.aliases)
+        for (const alias of cmd.aliases) {
+          this.commands.set(alias, cmd)
+          let temp = Object.assign({}, cmd)
+          temp.name = alias
+          temp.aliases = null
+          temp.description = 'Alias for ' + cmd.name
+          this.slashCommands.push(temp)
+        }
     }
 
     if (!config.general.guildID)
@@ -40,10 +50,10 @@ export class CommandHandler {
       .then(() => console.log('INFO: commands have been registered'))
   }
 
-  runCommand(command: string, options: CommandOptions) {
+  getCommand(command: string): iCommand {
     const cmd = this.commands.get(command)
 
-    if (cmd) return cmd.execute(options)
-    else return console.error(`ERROR: couldn't find command named '${command}'`)
+    if (cmd) return cmd
+    else throw new Error(`ERROR: couldn't find command named '${command}'`)
   }
 }
