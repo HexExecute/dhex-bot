@@ -1,8 +1,6 @@
-<<<<<<< HEAD
 # dhex-bot
 =======
 # DHex Bot
->>>>>>> 6d79a3518c74dd2cca18c129380505ed60e4dcd4
 
 An all in one open source discord bot.
 
