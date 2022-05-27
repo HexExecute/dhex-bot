@@ -6,8 +6,10 @@ An all in one open source discord bot.
 
 ## Setup
 (make sure you have git installed)
-In order to setup the bot run `git clone https://github.com/HexExecute/dhex-bot.git; cd dhex-bot; bash setup.sh` in your terminal of choice.
-This command will walk you through the setup process of the discord bot, giving you recommendations, and setting up your config.
+In order to setup the bot run this in your terminal of choice. This will open up the setup prompt,
+``git clone https://github.com/HexExecute/dhex-bot.git; cd dhex-bot; bash setup.sh``
+this prompt will walk you through the setup process of the discord bot. 
+Giving you recommendations, and setting up your config as you go.
 
 <br><br>
 
