@@ -7,9 +7,7 @@ function getOptions(option: CommandInteractionOption) {
   return res
 }
 
-export default function ArgumentFormatter(
-  options: readonly CommandInteractionOption[]
-) {
+export default function (options: readonly CommandInteractionOption[]) {
   const args: any = {}
 
   for (const option of options) {

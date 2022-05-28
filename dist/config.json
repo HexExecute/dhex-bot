@@ -13,5 +13,15 @@
     },
     "general": {
         "guildID": "837767108867784754"
+    },
+    "api": {
+        "password": "test_password",
+        "port": 3000
+    },
+    "roles": {
+        "muteRole": "838909955503292486"
+    },
+    "database": {
+        "mongoDB": "mongodb+srv://dhex-bot:umbWDJD9dKrVZTB@dhex-bot-storage.ziofxrj.mongodb.net/?retryWrites=true&w=majority"
     }
 }

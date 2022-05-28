@@ -8,7 +8,7 @@ function getOptions(option) {
         res[subOption.name] = subOption.value;
     return res;
 }
-function ArgumentFormatter(options) {
+function default_1(options) {
     const args = {};
     for (const option of options) {
         switch (option.type) {
@@ -30,4 +30,4 @@ function ArgumentFormatter(options) {
     }
     return args;
 }
-exports.default = ArgumentFormatter;
+exports.default = default_1;

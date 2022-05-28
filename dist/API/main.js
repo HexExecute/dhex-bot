@@ -13,12 +13,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-function run() {
-    return __awaiter(this, void 0, void 0, function* () {
+const config_json_1 = __importDefault(require("../config.json"));
+exports.default = {
+    run: () => __awaiter(void 0, void 0, void 0, function* () {
         const app = (0, express_1.default)();
-        yield app.listen(3000, () => {
-            console.log('STARTUP: dashboard started on port 3000');
+        app.get('/', (req, res) => {
+            res.send('Hello World');
         });
-    });
-}
-exports.default = { run };
+        app.listen(config_json_1.default.api.port, () => {
+            console.log('API: online');
+        });
+    }),
+};

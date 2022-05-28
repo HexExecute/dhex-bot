@@ -52,6 +52,7 @@ class EventHandler {
                     .default;
                 this.client.on(event.event, event.run);
             }
+            console.log('INFO: events have been registered');
         });
     }
 }

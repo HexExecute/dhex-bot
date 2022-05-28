@@ -66,7 +66,7 @@ class CommandHandler {
             if (!config_json_1.default.general.guildID)
                 return console.error('ERROR: please provide a guildID in the config');
             const guild = yield this.client.guilds.fetch(config_json_1.default.general.guildID);
-            guild.commands
+            yield guild.commands
                 .set(this.slashCommands)
                 .then(() => console.log('INFO: commands have been registered'));
         });

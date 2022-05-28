@@ -2,7 +2,12 @@ import { client } from '../main'
 import { Event } from '../Structures/Event'
 import { CommandOptions, iCommand } from '../Typings/iCommand'
 import ArgumentFormatter from '../Scripts/ArgumentFormatter'
-import { CommandInteraction, CommandInteractionOption } from 'discord.js'
+import {
+  CommandInteraction,
+  CommandInteractionOption,
+  GuildMember,
+  User,
+} from 'discord.js'
 
 function capitalizeTheFirstLetterOfEachWord(words: string): string {
   let separateWord = words.toLowerCase().split(' ')
@@ -18,24 +23,27 @@ function defer(inter: CommandInteraction, command: iCommand) {
   else return inter.deferReply()
 }
 
-export default new Event('interactionCreate', interaction => {
+export default new Event('interactionCreate', async interaction => {
   if (!interaction.isCommand()) return
   const inter: CommandInteraction = interaction
   const args: readonly CommandInteractionOption[] = inter.options.data
 
   const command: iCommand = client.commands.getCommand(inter.commandName)
-  defer(inter, command).then(() => {
+  await defer(inter, command).then(async () => {
     if (command.permissions)
       if (!inter.memberPermissions?.has(command.permissions))
         return inter.editReply(`Sorry, you don't have permissions to run that command!\n\nRequired: ${capitalizeTheFirstLetterOfEachWord(
           (command.permissions as string[]).join(', ').replace('_', ' ')
         )}
             `)
+    const authorUser = inter.member?.user as User
+    const author: GuildMember = await client.guild.members.fetch(authorUser.id)
 
     command.execute({
       interaction: inter,
       args: ArgumentFormatter(args),
       client: client,
+      author: author,
     } as CommandOptions)
   })
 })

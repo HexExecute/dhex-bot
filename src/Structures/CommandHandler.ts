@@ -45,7 +45,7 @@ export class CommandHandler {
       return console.error('ERROR: please provide a guildID in the config')
 
     const guild: Guild = await this.client.guilds.fetch(config.general.guildID)
-    guild.commands
+    await guild.commands
       .set(this.slashCommands)
       .then(() => console.log('INFO: commands have been registered'))
   }

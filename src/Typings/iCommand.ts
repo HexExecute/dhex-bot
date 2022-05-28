@@ -2,13 +2,15 @@ import { DHexClient } from '../Structures/DHexClient'
 import {
   ApplicationCommandOptionData,
   CommandInteraction,
+  GuildMember,
   PermissionResolvable,
 } from 'discord.js'
 
 export interface CommandOptions {
-  args: object
+  args: any
   interaction: CommandInteraction
   client: DHexClient
+  author: GuildMember
 }
 
 export interface iCommand {

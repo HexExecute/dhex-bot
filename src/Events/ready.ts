@@ -1,6 +1,6 @@
 import { Event } from '../Structures/Event'
+import { client } from '../main'
 
-export default new Event('ready', () => {
-  console.clear()
-  console.log('INFO: online')
+export default new Event('ready', async () => {
+  await client.start()
 })
