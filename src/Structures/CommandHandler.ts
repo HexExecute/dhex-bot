@@ -6,12 +6,12 @@ import {
   ApplicationCommandData,
 } from 'discord.js'
 
-import config from '../../config.json'
+const config = require('../../config.json')
 import fs from 'fs'
 import path from 'path'
 
 export class CommandHandler {
-  public commands: Map<string, iCommand> = new Map()
+  public list: Map<string, iCommand> = new Map()
   public client: DHexClient
 
   private slashCommands: ApplicationCommandDataResolvable[] = []
@@ -27,12 +27,12 @@ export class CommandHandler {
     for (const file of files) {
       let cmd = (await import(dir + file)).default
 
-      this.commands.set(cmd.name, cmd)
+      this.list.set(cmd.name, cmd)
       this.slashCommands.push(cmd as ApplicationCommandData)
 
       if (cmd.aliases)
         for (const alias of cmd.aliases) {
-          this.commands.set(alias, cmd)
+          this.list.set(alias, cmd)
           let temp = Object.assign({}, cmd)
           temp.name = alias
           temp.aliases = null
@@ -51,7 +51,7 @@ export class CommandHandler {
   }
 
   getCommand(command: string): iCommand {
-    const cmd = this.commands.get(command)
+    const cmd = this.list.get(command)
 
     if (cmd) return cmd
     else throw new Error(`ERROR: couldn't find command named '${command}'`)

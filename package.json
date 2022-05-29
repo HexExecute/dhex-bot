@@ -4,7 +4,7 @@
   "description": "An all in one open source discord bot.",
   "main": "index.js",
   "scripts": {
-    "start": "clear; echo 'STARTUP: compiling...'; tsc; clear; echo 'STARTUP: starting...'; node dist/main.js",
+    "start": "clear; echo 'STARTUP: compiling...'; tsc; clear; echo 'STARTUP: starting...'; node dist/src/main.js",
     "start:prod": "clear; echo 'STARTUP: starting...'; node dist/main.js;"
   },
   "repository": {

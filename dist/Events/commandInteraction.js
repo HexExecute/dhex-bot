@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const main_1 = require("../main");
 const Event_1 = require("../Structures/Event");
 const ArgumentFormatter_1 = __importDefault(require("../Scripts/ArgumentFormatter"));
+const GetCommandPermissions_1 = __importDefault(require("../Scripts/GetCommandPermissions"));
 function capitalizeTheFirstLetterOfEachWord(words) {
     let separateWord = words.toLowerCase().split(' ');
     for (let i = 0; i < separateWord.length; i++) {
@@ -39,7 +40,7 @@ exports.default = new Event_1.Event('interactionCreate', (interaction) => __awai
         var _a, _b;
         if (command.permissions)
             if (!((_a = inter.memberPermissions) === null || _a === void 0 ? void 0 : _a.has(command.permissions)))
-                return inter.editReply(`Sorry, you don't have permissions to run that command!\n\nRequired: ${capitalizeTheFirstLetterOfEachWord(command.permissions.join(', ').replace('_', ' '))}
+                return inter.editReply(`Sorry, you don't have permissions to run that command!\n\nRequired: ${(0, GetCommandPermissions_1.default)(command)}
             `);
         const authorUser = (_b = inter.member) === null || _b === void 0 ? void 0 : _b.user;
         const author = yield main_1.client.guild.members.fetch(authorUser.id);

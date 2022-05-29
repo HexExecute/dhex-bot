@@ -15,9 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.checkMutes = exports.unmute = exports.mute = void 0;
 const main_1 = require("../main");
 const mute_1 = __importDefault(require("../Schemas/mute"));
-const config_json_1 = __importDefault(require("../config.json"));
+const config = require('../../config.json');
 const ms_1 = __importDefault(require("ms"));
-const { muteRole } = config_json_1.default.roles;
+const { muteRole } = config.roles;
 function getCurrentlyMuted(target) {
     return __awaiter(this, void 0, void 0, function* () {
         const previousMutes = yield mute_1.default.find({

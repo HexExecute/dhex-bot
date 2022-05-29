@@ -18,24 +18,22 @@ const CommandHandler_1 = require("./CommandHandler");
 const EventHandler_1 = require("./EventHandler");
 const mute_1 = require("../Scripts/mute");
 const main_1 = __importDefault(require("../API/main"));
-const config_json_1 = __importDefault(require("../config.json"));
+const config = require('../../config.json');
 const mongoose_1 = __importDefault(require("mongoose"));
 class DHexClient extends discord_js_1.Client {
     constructor() {
-        super(config_json_1.default.client.options);
+        super(config.client.options);
         this.commands = new CommandHandler_1.CommandHandler(this);
         this.events = new EventHandler_1.EventHandler(this);
         this.guild = {};
     }
     start() {
         return __awaiter(this, void 0, void 0, function* () {
-            this.guild = yield this.guilds.fetch(config_json_1.default.general.guildID);
+            this.guild = yield this.guilds.fetch(config.general.guildID);
             yield mongoose_1.default
-                .connect(config_json_1.default.database.mongoDB, { keepAlive: true })
-                .then(() => __awaiter(this, void 0, void 0, function* () {
-                console.log('INFO: mongoDB connected');
-                yield main_1.default.run();
-            }));
+                .connect(config.database.mongoDB, { keepAlive: true })
+                .then(() => __awaiter(this, void 0, void 0, function* () { return console.log('INFO: mongoDB connected'); }));
+            main_1.default.run();
             yield this.commands.register();
             yield (0, mute_1.checkMutes)();
             console.log('INFO: online');

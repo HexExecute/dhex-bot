@@ -2,6 +2,7 @@ import { client } from '../main'
 import { Event } from '../Structures/Event'
 import { CommandOptions, iCommand } from '../Typings/iCommand'
 import ArgumentFormatter from '../Scripts/ArgumentFormatter'
+import GetCommandPermissions from '../Scripts/GetCommandPermissions'
 import {
   CommandInteraction,
   CommandInteractionOption,
@@ -32,8 +33,8 @@ export default new Event('interactionCreate', async interaction => {
   await defer(inter, command).then(async () => {
     if (command.permissions)
       if (!inter.memberPermissions?.has(command.permissions))
-        return inter.editReply(`Sorry, you don't have permissions to run that command!\n\nRequired: ${capitalizeTheFirstLetterOfEachWord(
-          (command.permissions as string[]).join(', ').replace('_', ' ')
+        return inter.editReply(`Sorry, you don't have permissions to run that command!\n\nRequired: ${GetCommandPermissions(
+          command
         )}
             `)
     const authorUser = inter.member?.user as User

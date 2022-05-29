@@ -36,7 +36,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EventHandler = void 0;
-const config_json_1 = __importDefault(require("../config.json"));
+const config = require('../../config.json');
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 class EventHandler {
@@ -45,7 +45,7 @@ class EventHandler {
     }
     register() {
         return __awaiter(this, void 0, void 0, function* () {
-            const dir = path_1.default.join(__dirname, '../', config_json_1.default.events.directory);
+            const dir = path_1.default.join(__dirname, '../', config.events.directory);
             const files = fs_1.default.readdirSync(dir);
             for (const file of files) {
                 const event = (yield Promise.resolve().then(() => __importStar(require(dir + file))))

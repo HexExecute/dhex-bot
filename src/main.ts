@@ -1,5 +1,5 @@
 import { DHexClient } from './Structures/DHexClient'
-import config from '../config.json'
+const config = require('../config.json')
 
 export const client = new DHexClient()
 

@@ -29,6 +29,7 @@ cat > config.json << EOF
   }
 }
 EOF
+cp config.json dist/
 printf "%s " "Alright, let's get you setup."
 read ans
 printf "\n"

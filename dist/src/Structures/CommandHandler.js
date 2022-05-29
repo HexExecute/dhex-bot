@@ -41,7 +41,7 @@ const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 class CommandHandler {
     constructor(client) {
-        this.commands = new Map();
+        this.list = new Map();
         this.slashCommands = [];
         this.client = client;
     }
@@ -51,11 +51,11 @@ class CommandHandler {
             const files = fs_1.default.readdirSync(dir);
             for (const file of files) {
                 let cmd = (yield Promise.resolve().then(() => __importStar(require(dir + file)))).default;
-                this.commands.set(cmd.name, cmd);
+                this.list.set(cmd.name, cmd);
                 this.slashCommands.push(cmd);
                 if (cmd.aliases)
                     for (const alias of cmd.aliases) {
-                        this.commands.set(alias, cmd);
+                        this.list.set(alias, cmd);
                         let temp = Object.assign({}, cmd);
                         temp.name = alias;
                         temp.aliases = null;
@@ -72,7 +72,7 @@ class CommandHandler {
         });
     }
     getCommand(command) {
-        const cmd = this.commands.get(command);
+        const cmd = this.list.get(command);
         if (cmd)
             return cmd;
         else

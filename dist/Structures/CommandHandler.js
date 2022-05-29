@@ -36,26 +36,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CommandHandler = void 0;
-const config_json_1 = __importDefault(require("../config.json"));
+const config = require('../../config.json');
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 class CommandHandler {
     constructor(client) {
-        this.commands = new Map();
+        this.list = new Map();
         this.slashCommands = [];
         this.client = client;
     }
     register() {
         return __awaiter(this, void 0, void 0, function* () {
-            const dir = path_1.default.join(__dirname, '../', config_json_1.default.commands.directory);
+            const dir = path_1.default.join(__dirname, '../', config.commands.directory);
             const files = fs_1.default.readdirSync(dir);
             for (const file of files) {
                 let cmd = (yield Promise.resolve().then(() => __importStar(require(dir + file)))).default;
-                this.commands.set(cmd.name, cmd);
+                this.list.set(cmd.name, cmd);
                 this.slashCommands.push(cmd);
                 if (cmd.aliases)
                     for (const alias of cmd.aliases) {
-                        this.commands.set(alias, cmd);
+                        this.list.set(alias, cmd);
                         let temp = Object.assign({}, cmd);
                         temp.name = alias;
                         temp.aliases = null;
@@ -63,16 +63,16 @@ class CommandHandler {
                         this.slashCommands.push(temp);
                     }
             }
-            if (!config_json_1.default.general.guildID)
+            if (!config.general.guildID)
                 return console.error('ERROR: please provide a guildID in the config');
-            const guild = yield this.client.guilds.fetch(config_json_1.default.general.guildID);
+            const guild = yield this.client.guilds.fetch(config.general.guildID);
             yield guild.commands
                 .set(this.slashCommands)
                 .then(() => console.log('INFO: commands have been registered'));
         });
     }
     getCommand(command) {
-        const cmd = this.commands.get(command);
+        const cmd = this.list.get(command);
         if (cmd)
             return cmd;
         else

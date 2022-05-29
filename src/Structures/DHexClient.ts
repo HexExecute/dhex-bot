@@ -5,7 +5,7 @@ import { checkMutes } from '../Scripts/mute'
 
 import api from '../API/main'
 
-import config from '../../config.json'
+const config = require('../../config.json')
 import mongoose from 'mongoose'
 
 export class DHexClient extends Client {
@@ -24,10 +24,8 @@ export class DHexClient extends Client {
     this.guild = await this.guilds.fetch(config.general.guildID)
     await mongoose
       .connect(config.database.mongoDB, { keepAlive: true })
-      .then(async () => {
-        console.log('INFO: mongoDB connected')
-        await api.run()
-      })
+      .then(async () => console.log('INFO: mongoDB connected'))
+    api.run()
     await this.commands.register()
     await checkMutes()
     console.log('INFO: online')

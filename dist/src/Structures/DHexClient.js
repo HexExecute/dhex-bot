@@ -32,10 +32,8 @@ class DHexClient extends discord_js_1.Client {
             this.guild = yield this.guilds.fetch(config_json_1.default.general.guildID);
             yield mongoose_1.default
                 .connect(config_json_1.default.database.mongoDB, { keepAlive: true })
-                .then(() => __awaiter(this, void 0, void 0, function* () {
-                console.log('INFO: mongoDB connected');
-                yield main_1.default.run();
-            }));
+                .then(() => __awaiter(this, void 0, void 0, function* () { return console.log('INFO: mongoDB connected'); }));
+            main_1.default.run();
             yield this.commands.register();
             yield (0, mute_1.checkMutes)();
             console.log('INFO: online');
