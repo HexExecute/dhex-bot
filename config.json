@@ -1,6 +1,6 @@
 {
   "client": {
-    "token": "",
+    "token": "OTcyOTQ0MDEwNTQ3MTcxNDM5.GUFsIa.urRcMkFrpp8J8hjd0YNljcIEzje9U3Rm5XwlFs",
     "options": {
       "intents": 32767
     }
@@ -12,16 +12,16 @@
     "directory": "Events/"
   },
   "general": {
-    "guildID": ""
+    "guildID": "837767108867784754"
   },
   "api": {
-    "password": "",
+    "password": "test_password",
     "port": 3000
   },
   "roles": {
-    "muteRole": ""
+    "muteRole": "838909955503292486"
   },
   "database": {
-    "mongoDB": ""
+    "mongoDB": "mongodb+srv://dhex-bot:umbWDJD9dKrVZTB@dhex-bot-storage.ziofxrj.mongodb.net/?retryWrites=true&w=majority"
   }
 }
