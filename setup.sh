@@ -1,5 +1,34 @@
 clear
-touch 'config.json'
+touch config.json
+cat > config.json << EOF
+{
+  "client": {
+    "token": "your discord bot token",
+    "options": {
+      "intents": 32767
+    }
+  },
+  "commands": {
+    "directory": "Commands/"
+  },
+  "events": {
+    "directory": "Events/"
+  },
+  "general": {
+    "guildID": "your guild ID"
+  },
+  "api": {
+    "password": "your dashboard password",
+    "port": 3000
+  },
+  "roles": {
+    "muteRole": "your mute role"
+  },
+  "database": {
+    "mongoDB": "your mongo link"
+  }
+}
+EOF
 printf "Alright, let's get you setup.\n"
 sleep 2s
 printf "\nFirst, let's create your discord bot.\n"
