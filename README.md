@@ -4,10 +4,10 @@ An all in one open source discord bot.
 
 <br><br>
 
-#### requirements
+## Requirements
 
-> git
-> jq
+- _git_
+- _jq_
 
 <br><br>
 
