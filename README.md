@@ -13,7 +13,7 @@ Giving you recommendations, and setting up your config as you go.
 
 <br><br>
 
-## Config
+### config.json
 ```
 {
   "client": {
