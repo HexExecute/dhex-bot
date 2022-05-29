@@ -6,8 +6,8 @@ An all in one open source discord bot.
 
 ## Requirements
 
-- _git_
-- _jq_
+- **git**
+- **jq**
 
 <br><br>
 
