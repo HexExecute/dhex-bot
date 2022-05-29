@@ -23,8 +23,10 @@ export default new Command({
   execute: async ({ interaction, args, client, author }) => {
     const target: GuildMember = await client.guild.members.fetch(args.member)
 
-    if (!target.kickable)
-      return interaction.editReply(`Sorry, but you can't kick that person!`)
+    if (!target.kickable) {
+      interaction.editReply(`Sorry, but you can't kick that person!`)
+      return setTimeout(() => interaction.deleteReply(), 5000)
+    }
 
     target.kick(args.reason).then(() =>
       interaction.editReply({

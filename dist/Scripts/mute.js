@@ -40,8 +40,7 @@ function unmute(target) {
     });
 }
 exports.unmute = unmute;
-function mute(interaction, target, reason, duration) {
-    var _a;
+function mute(author, target, reason, duration) {
     return __awaiter(this, void 0, void 0, function* () {
         const currentlyMuted = yield getCurrentlyMuted(target);
         let time;
@@ -55,7 +54,7 @@ function mute(interaction, target, reason, duration) {
                 mute.save();
             }
         return yield new mute_1.default({
-            authorID: (_a = interaction.member) === null || _a === void 0 ? void 0 : _a.user.id,
+            authorID: author.user.id,
             targetID: target.user.id,
             reason: reason,
             active: true,
@@ -63,9 +62,8 @@ function mute(interaction, target, reason, duration) {
         })
             .save()
             .then(() => {
-            var _a;
             !target.roles.cache.has(muteRole) ? target.roles.add(muteRole) : null;
-            console.log(`INFO: ${target.user.id} has been muted by ${(_a = interaction.member) === null || _a === void 0 ? void 0 : _a.user.id}`);
+            console.log(`INFO: ${target.user.id} has been muted by ${author.user.id}`);
             if (duration)
                 setTimeout(() => checkMutes(), (0, ms_1.default)(duration));
         });

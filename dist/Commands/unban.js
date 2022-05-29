@@ -10,33 +10,33 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const Command_1 = require("../Structures/Command");
-const mute_1 = require("../Scripts/mute");
+const ban_1 = require("../Scripts/ban");
 const discord_js_1 = require("discord.js");
 exports.default = new Command_1.Command({
-    name: 'unmute',
-    description: 'A command to unmute members.',
-    usage: 'unmute !(member)',
-    permissions: ['MANAGE_MESSAGES'],
+    name: 'unban',
+    description: 'A command to unban members.',
+    usage: 'unban !(member)',
+    permissions: ['BAN_MEMBERS'],
     options: [
         {
             name: 'member',
-            description: 'member to unmute',
+            description: 'member to unban',
             type: 'USER',
             required: true,
         },
     ],
     execute: ({ interaction, args, client, author }) => __awaiter(void 0, void 0, void 0, function* () {
-        const target = yield client.guild.members.fetch(args.member);
-        yield (0, mute_1.unmute)(target);
+        const target = yield client.users.fetch(args.member);
+        yield (0, ban_1.unban)(target);
         interaction.editReply({
             embeds: [
                 new discord_js_1.MessageEmbed()
-                    .setTitle('Un-Mute')
-                    .setDescription(`<@${author.id}> has unmuted <@${args.member}>`)
-                    .setThumbnail(target.user.displayAvatarURL())
+                    .setTitle('Un-Ban')
+                    .setDescription(`<@${author.id}> has unbanned <@${args.member}>`)
+                    .setThumbnail(target.displayAvatarURL())
                     .setAuthor({
-                    name: target.user.tag,
-                    iconURL: target.user.displayAvatarURL(),
+                    name: target.tag,
+                    iconURL: target.displayAvatarURL(),
                 })
                     .setFooter({
                     text: author.user.tag,

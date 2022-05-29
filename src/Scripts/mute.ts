@@ -1,5 +1,4 @@
 import { CommandInteraction, GuildMember } from 'discord.js'
-import { DHexClient } from '../Structures/DHexClient'
 import { client } from '../main'
 import muteSchema from '../Schemas/mute'
 
@@ -30,7 +29,7 @@ async function unmute(target: GuildMember) {
 }
 
 async function mute(
-  interaction: CommandInteraction,
+  author: GuildMember,
   target: GuildMember,
   reason: string,
   duration: string
@@ -48,7 +47,7 @@ async function mute(
     }
 
   return await new muteSchema({
-    authorID: interaction.member?.user.id,
+    authorID: author.user.id,
     targetID: target.user.id,
     reason: reason,
     active: true,
@@ -57,9 +56,7 @@ async function mute(
     .save()
     .then(() => {
       !target.roles.cache.has(muteRole) ? target.roles.add(muteRole) : null
-      console.log(
-        `INFO: ${target.user.id} has been muted by ${interaction.member?.user.id}`
-      )
+      console.log(`INFO: ${target.user.id} has been muted by ${author.user.id}`)
       if (duration) setTimeout(() => checkMutes(), ms(duration))
     })
 }

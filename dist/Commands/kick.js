@@ -32,8 +32,10 @@ exports.default = new Command_1.Command({
     ],
     execute: ({ interaction, args, client, author }) => __awaiter(void 0, void 0, void 0, function* () {
         const target = yield client.guild.members.fetch(args.member);
-        if (!target.kickable)
-            return interaction.editReply(`Sorry, but you can't kick that person!`);
+        if (!target.kickable) {
+            interaction.editReply(`Sorry, but you can't kick that person!`);
+            return setTimeout(() => interaction.deleteReply(), 5000);
+        }
         target.kick(args.reason).then(() => interaction.editReply({
             embeds: [
                 new discord_js_1.MessageEmbed()

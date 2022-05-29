@@ -13,50 +13,55 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const Command_1 = require("../Structures/Command");
-const mute_1 = require("../Scripts/mute");
+const ban_1 = require("../Scripts/ban");
 const discord_js_1 = require("discord.js");
 const ms_1 = __importDefault(require("ms"));
 exports.default = new Command_1.Command({
-    name: 'mute',
-    description: 'A command to mute members.',
-    usage: 'mute !(member) ?(duration)',
-    permissions: ['MANAGE_MESSAGES'],
+    name: 'ban',
+    description: 'A command to ban members.',
+    usage: 'ban !(member) ?(duration)',
+    permissions: ['BAN_MEMBERS'],
     options: [
         {
             name: 'member',
-            description: 'member to mute',
+            description: 'member to ban',
             type: 'USER',
             required: true,
         },
         {
             name: 'reason',
-            description: 'reason for mute',
+            description: 'reason for ban',
             type: 'STRING',
             required: true,
         },
         {
             name: 'duration',
-            description: 'duration of mute',
+            description: 'duration of ban',
             type: 'STRING',
             required: false,
         },
     ],
     execute: ({ interaction, args, client, author }) => __awaiter(void 0, void 0, void 0, function* () {
-        const target = yield client.guild.members.fetch(args.member);
+        const targetMember = yield client.guild.members.fetch(args.member);
+        if (!targetMember)
+            return interaction.editReply('That member is not in the server.');
+        if (!targetMember.bannable)
+            return interaction.editReply(`Sorry, you can't ban that person!`);
+        const target = yield client.users.fetch(args.member);
         if (args.duration)
             if ((0, ms_1.default)(args.duration))
-                yield (0, mute_1.mute)(author, target, args.reason, args.duration);
+                yield (0, ban_1.ban)(author, target, args.reason, args.duration);
             else
                 return interaction.editReply('Please provide a valid duration.');
         else
-            yield (0, mute_1.mute)(author, target, args.reason, args.duration);
+            yield (0, ban_1.ban)(author, target, args.reason, args.duration);
         const embed = new discord_js_1.MessageEmbed()
-            .setTitle('Mute')
-            .setDescription(`<@${author.id}> has muted <@${args.member}>`)
-            .setThumbnail(target.user.displayAvatarURL())
+            .setTitle('Ban')
+            .setDescription(`<@${author.id}> has banned <@${args.member}>`)
+            .setThumbnail(target.displayAvatarURL())
             .setAuthor({
-            name: target.user.tag,
-            iconURL: target.user.displayAvatarURL(),
+            name: target.tag,
+            iconURL: target.displayAvatarURL(),
         })
             .addField('Reason', args.reason)
             .setFooter({

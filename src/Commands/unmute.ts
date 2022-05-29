@@ -10,7 +10,7 @@ export default new Command({
   options: [
     {
       name: 'member',
-      description: 'member to mute',
+      description: 'member to unmute',
       type: 'USER',
       required: true,
     },
@@ -22,7 +22,7 @@ export default new Command({
     interaction.editReply({
       embeds: [
         new MessageEmbed()
-          .setTitle('Mute')
+          .setTitle('Un-Mute')
           .setDescription(`<@${author.id}> has unmuted <@${args.member}>`)
           .setThumbnail(target.user.displayAvatarURL())
           .setAuthor({
