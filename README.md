@@ -8,6 +8,7 @@ An all in one open source discord bot.
 
 - **git**
 - **jq**
+- **node.js**
 
 <br><br>
 
