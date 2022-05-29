@@ -15,17 +15,32 @@ Giving you recommendations, and setting up your config as you go.
 
 ### config.json
 ```
-client:
-  token: token for your discord bot
-  options:
-    intents: intents for your client
+{
+  "client": {
+    "token": "your discord bot token",
+    "options": {
+      "intents": 32767
+    }
+  },
+  "commands": {
+    "directory": "Commands/"
+  },
+  "events": {
+    "directory": "Events/"
+  },
+  "general": {
+    "guildID": "your guild ID"
+  },
+  "api": {
+    "password": "your dashboard password",
+    "port": 3000
+  },
+  "roles": {
+    "muteRole": "your mute role"
+  },
+  "database": {
+    "mongoDB": "your mongo link"
+  }
+}
 
-commands:
-  directory: directory to your commands folder
-
-events:
-  directory: directory to your events folder
-
-general:
-  guildID: the ID of the guild the bot will be in
 ```
