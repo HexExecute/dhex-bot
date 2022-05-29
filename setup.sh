@@ -1,4 +1,5 @@
 clear
+touch 'config.json'
 printf "Alright, let's get you setup.\n"
 sleep 2s
 printf "\nFirst, let's create your discord bot.\n"
