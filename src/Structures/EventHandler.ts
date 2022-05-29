@@ -2,7 +2,7 @@ import { DHexClient } from './DHexClient'
 import { Event } from './Event'
 import { ClientEvents } from 'discord.js'
 
-import config from '../config.json'
+import config from '../../config.json'
 import fs from 'fs'
 import path from 'path'
 

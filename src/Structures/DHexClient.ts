@@ -5,7 +5,7 @@ import { checkMutes } from '../Scripts/mute'
 
 import api from '../API/main'
 
-import config from '../config.json'
+import config from '../../config.json'
 import mongoose from 'mongoose'
 
 export class DHexClient extends Client {

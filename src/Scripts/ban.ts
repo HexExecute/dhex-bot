@@ -1,4 +1,4 @@
-import { GuildBan, GuildMember, User } from 'discord.js'
+import { GuildMember, User } from 'discord.js'
 import { client } from '../main'
 
 import banSchema from '../Schemas/ban'

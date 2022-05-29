@@ -1,6 +1,6 @@
 import { Command } from '../Structures/Command'
 import { unban } from '../Scripts/ban'
-import { GuildMember, MessageEmbed, User } from 'discord.js'
+import { MessageEmbed, User } from 'discord.js'
 
 export default new Command({
   name: 'unban',

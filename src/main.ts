@@ -1,5 +1,5 @@
 import { DHexClient } from './Structures/DHexClient'
-import config from './config.json'
+import config from '../config.json'
 
 export const client = new DHexClient()
 

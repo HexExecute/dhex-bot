@@ -1,8 +1,8 @@
-import { CommandInteraction, GuildMember } from 'discord.js'
+import { GuildMember } from 'discord.js'
 import { client } from '../main'
 import muteSchema from '../Schemas/mute'
 
-import config from '../config.json'
+import config from '../../config.json'
 import ms from 'ms'
 
 const { muteRole } = config.roles
